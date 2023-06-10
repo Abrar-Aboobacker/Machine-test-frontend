@@ -125,7 +125,7 @@ const SignupPage = () => {
               <TextField   sx={{ backgroundColor: "#171717",width:{xs:'90%',sm:480,md:'75%',lg:'65%'},mx:{xs:2,sm:10,md:5,lg:12},mt:{xs:3,sm:5}}}  margin="normal" type={"email"} label="Email" variant="outlined"  />
               <TextField  sx={{ backgroundColor: "#171717",width:{xs:'90%',sm:480,md:'75%',lg:'65%'},mx:{xs:2,sm:10,md:5,lg:12},mt:{xs:3,sm:5}}} margin="normal" type={"password"} label="Password" variant="outlined" />
               <Button variant="contained" sx={{  backgroundColor: "#00ff66",width:{xs:'90%',sm:480,md:'75%',lg:'65%'},fontWeight:600 ,mx:{xs:2,sm:10,md:5,lg:5},ml:{xs:2,sm:10,md:5,lg:12},mt:{xs:1,sm:5},p:2,color:'#171717', ":hover": { backgroundColor: "#171717", color: "#00ff66" }, marginTop: 3, borderRadius: 10 }}>Get OTP</Button>
-              <Typography textAlign={'center'} sx={{color:'white',mb:2,mt:5,display:{xs:'block',sm:'none'}}}>
+              <Typography textAlign={'center'} sx={{color:'white',mb:2,mt:5,display:{xs:'block',sm:'block',md:'none'}}}>
                 Have an account?Sign in
               </Typography>
             </Box>
