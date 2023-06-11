@@ -83,7 +83,7 @@ const SigninPage = () => {
       </Box>
       </Box>
       <Box sx={{display:{xs:'block',sm:'block',md:'none'}}}>
-              <Typography sx={{fontWeight:600,color:'#00ff66',pt:{xs:10,sm:18},pl:{xs:3,sm:6}}} variant='h5'>CREAT AN ACCOUNT</Typography>
+              <Typography sx={{fontWeight:600,color:'#00ff66',pt:{xs:10,sm:18},pl:{xs:3,sm:6}}} variant='h5'>LOGIN</Typography>
               <Typography sx={{color:'white',pt:{xs:2,sm:3},pl:{xs:3,sm:6},pr:{xs:3,sm:5}}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</Typography>
             </Box>
       <Box
@@ -120,7 +120,7 @@ const SigninPage = () => {
             Don't have an account?Sign up
             </Typography>
             <Box sx={{backgroundColor:'#171717',mr:{md:5,lg:10},height:"80%",width:{md:360,lg:400},borderRadius:6,display:{xs:'none',sm:'none',md:'block'}}}>
-              <Typography sx={{fontWeight:600,color:'#00ff66',pt:5,pl:2}} variant='h5'>CREAT AN ACCOUNT</Typography>
+              <Typography sx={{fontWeight:600,color:'#00ff66',pt:5,pl:2}} variant='h5'>LOGIN</Typography>
               <Typography sx={{color:'white',pt:5,pl:2,pr:3}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</Typography>
             </Box>
           </Box>
