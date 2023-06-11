@@ -27,7 +27,6 @@ const LoginOtp = () => {
       if (seconds > 0) {
         setSeconds(seconds - 1);
       }
-
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(interval);
@@ -37,12 +36,17 @@ const LoginOtp = () => {
         }
       }
     }, 1000);
-
+    
     return () => {
       clearInterval(interval);
     };
   }, [seconds, minutes]);
-
+  useEffect(() => {
+    if (localStorage.getItem("usertoken")) {
+      navigate("/");
+    }
+    // eslint-disable-next-line
+  }, [])
   const formik = useFormik({
     initialValues: {
       otpis: "",
