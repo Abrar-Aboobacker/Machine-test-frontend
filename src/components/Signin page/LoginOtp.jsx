@@ -17,9 +17,8 @@ import { otpSchema } from "../../validation/otpvalidation";
 import { hideLoading, showLoading } from "../../redux/alertsSlice";
 import { setUser } from "../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
-const steps = ["Get OTP", "Validate OTP", "Sign in"];
 
-const Otp = () => {
+const LoginOtp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
@@ -230,17 +229,6 @@ const Otp = () => {
             }}
           >
             <Box sx={{ marginTop: { xs: 0, sm: 0, md: 5 } }}>
-              <Stepper
-                sx={{ ml: { xs: 0, sm: 0, md: 0, lg: 0 } }}
-                activeStep={1}
-                alternativeLabel
-              >
-                {steps.map((label) => (
-                  <Step>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
               <form onSubmit={formik.handleSubmit}>
                 <TextField
                   sx={{
@@ -343,4 +331,4 @@ const Otp = () => {
   );
 };
 
-export default Otp;
+export default LoginOtp;

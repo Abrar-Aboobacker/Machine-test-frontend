@@ -14,45 +14,40 @@ import { useFormik } from "formik";
 import { userSchema } from "../../validation/userSchema";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/alertsSlice";
-import axios from "../../axios/axios"
+import axios from "../../axios/axios";
 import { toast } from "react-hot-toast";
 import { setUser } from "../../redux/userSlice";
 const steps = ["Get OTP", "Validate OTP", "Sign in"];
 
 const Signup = () => {
-  const dispatch =useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      phone: '',
-      password: '',
-      cpassword:'',
-      about: '',
+      name: "",
+      email: "",
     },
-    validationSchema:userSchema,
-     onSubmit:async (values,helpers)=>{
-    try {
-      dispatch(showLoading())
-      const response = await axios.post("/signupPost",{
-        values
-      })
-      dispatch(hideLoading())
-      if (response.data.success) {
-        toast.success(response.data.message)
-        dispatch(setUser(values))
-        navigate('/otp')
-
-      }else{
-        toast.error(response.data.message)
+    validationSchema: userSchema,
+    onSubmit: async (values, helpers) => {
+      try {
+        dispatch(showLoading());
+        const response = await axios.post("/signupPost", {
+          values,
+        });
+        dispatch(hideLoading());
+        if (response.data.success) {
+          toast.success(response.data.message);
+          dispatch(setUser(values));
+          navigate("/otp");
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        helpers.setErrors({ submit: error.message });
+        toast.error("something went wrong");
       }
-    } catch (error) {
-      helpers.setErrors({submit:error.message})
-      toast.error("something went wrong")
-     }
-   }
-  })
+    },
+  });
   return (
     <>
       <Box
@@ -203,61 +198,61 @@ const Signup = () => {
                   </Step>
                 ))}
               </Stepper>
-                  <form onSubmit={formik.handleSubmit}>
-              <TextField
-                sx={{
-                  backgroundColor: "#171717",
-                  width: { xs: "90%", sm: 480, md: "75%", lg: "65%" },
-                  mx: { xs: 2, sm: 10, md: 5, lg: 12 },
-                  mt: { xs: 3, sm: 5 },
-                }}
-                margin="normal"
-                type={"text"}
-                name="name"
-                value={formik.values.name}
-                error={formik.errors.name}
-                helperText={formik.errors.name}
-                onChange={formik.handleChange}
-                label="Name"
-                variant="outlined"
-              />
-              <TextField
-                sx={{
-                  backgroundColor: "#171717",
-                  width: { xs: "90%", sm: 480, md: "75%", lg: "65%" },
-                  mx: { xs: 2, sm: 10, md: 5, lg: 12 },
-                  mt: { xs: 3, sm: 5 },
-                }}
-                name='email'
-                value={formik.values.email}
-            error={formik.errors.email}
-            helperText={formik.errors.email}
-            onChange={formik.handleChange}
-                margin="normal"
-                type={"email"}
-                label="Email"
-                variant="outlined"
-              />
-              <Button
-                variant="contained"
-                name='submit'
-                type="submit"
-                sx={{
-                  backgroundColor: "#00ff66",
-                  width: { xs: "90%", sm: 480, md: "75%", lg: "65%" },
-                  fontWeight: 600,
-                  mx: { xs: 2, sm: 10, md: 5, lg: 5 },
-                  ml: { xs: 2, sm: 10, md: 5, lg: 12 },
-                  mt: { xs: 1, sm: 5 },
-                  p: 2,
-                  color: "#171717",
-                  ":hover": { backgroundColor: "#171717", color: "#00ff66" },
-                  marginTop: 3,
-                  borderRadius: 10,
-                }}
-              >
-                Get OTP
-              </Button>
+              <form onSubmit={formik.handleSubmit}>
+                <TextField
+                  sx={{
+                    backgroundColor: "#171717",
+                    width: { xs: "90%", sm: 480, md: "75%", lg: "65%" },
+                    mx: { xs: 2, sm: 10, md: 5, lg: 12 },
+                    mt: { xs: 3, sm: 5 },
+                  }}
+                  margin="normal"
+                  type={"text"}
+                  name="name"
+                  value={formik.values.name}
+                  error={formik.errors.name}
+                  helperText={formik.errors.name}
+                  onChange={formik.handleChange}
+                  label="Name"
+                  variant="outlined"
+                />
+                <TextField
+                  sx={{
+                    backgroundColor: "#171717",
+                    width: { xs: "90%", sm: 480, md: "75%", lg: "65%" },
+                    mx: { xs: 2, sm: 10, md: 5, lg: 12 },
+                    mt: { xs: 3, sm: 5 },
+                  }}
+                  name="email"
+                  value={formik.values.email}
+                  error={formik.errors.email}
+                  helperText={formik.errors.email}
+                  onChange={formik.handleChange}
+                  margin="normal"
+                  type={"email"}
+                  label="Email"
+                  variant="outlined"
+                />
+                <Button
+                  variant="contained"
+                  name="submit"
+                  type="submit"
+                  sx={{
+                    backgroundColor: "#00ff66",
+                    width: { xs: "90%", sm: 480, md: "75%", lg: "65%" },
+                    fontWeight: 600,
+                    mx: { xs: 2, sm: 10, md: 5, lg: 5 },
+                    ml: { xs: 2, sm: 10, md: 5, lg: 12 },
+                    mt: { xs: 1, sm: 5 },
+                    p: 2,
+                    color: "#171717",
+                    ":hover": { backgroundColor: "#171717", color: "#00ff66" },
+                    marginTop: 3,
+                    borderRadius: 10,
+                  }}
+                >
+                  Get OTP
+                </Button>
               </form>
               <Typography
                 textAlign={"center"}
@@ -268,7 +263,13 @@ const Signup = () => {
                   display: { xs: "block", sm: "block", md: "none" },
                 }}
               >
-               Have an account?<Link style={{color:'white',textDecoration:'underline'}} to={"/signin"}>Sign in</Link>
+                Have an account?
+                <Link
+                  style={{ color: "white", textDecoration: "underline" }}
+                  to={"/signin"}
+                >
+                  Sign in
+                </Link>
               </Typography>
             </Box>
             <Box sx={{ mt: 4 }}>
@@ -281,7 +282,13 @@ const Signup = () => {
                   display: { xs: "none", sm: "none", md: "block" },
                 }}
               >
-                Have an account?<Link style={{color:'white',textDecoration:'underline'}} to={"/signin"}>Sign in</Link>
+                Have an account?
+                <Link
+                  style={{ color: "white", textDecoration: "underline" }}
+                  to={"/signin"}
+                >
+                  Sign in
+                </Link>
               </Typography>
               <Box
                 sx={{
