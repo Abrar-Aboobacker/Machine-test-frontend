@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import LoginOtpPage from "./pages/User/LoginOtpPage";
 function App() {
+  // eslint-disable-next-line
   const [progress, setProgress] = useState(0);
   const { loading } = useSelector((state) => state.alerts);
   return (

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Step,
-  StepLabel,
-  Stepper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import Circle from "../Background circle/Circle";
 import axios from "../../axios/axios";
@@ -18,17 +10,16 @@ import { useFormik } from "formik";
 import { toast } from "react-hot-toast";
 import { setUser } from "../../redux/userSlice";
 import { loginSchema } from "../../validation/loginValidation";
-const steps = ["Get OTP", "Validate OTP", "Sign in"];
 
 const Login = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(()=>{
-    if(localStorage.getItem('usertoken')){
-      navigate('/')
+  useEffect(() => {
+    if (localStorage.getItem("usertoken")) {
+      navigate("/");
     }
-  },[])
+    // eslint-disable-next-line
+  }, []);
   const formik = useFormik({
     initialValues: {
       email: "",

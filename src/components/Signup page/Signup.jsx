@@ -26,6 +26,7 @@ const Signup = () => {
     if(localStorage.getItem('usertoken')){
       navigate('/')
     }
+    // eslint-disable-next-line
   },[])
   const formik = useFormik({
     initialValues: {
