@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Circle from "../Background circle/Circle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,11 @@ import { setUser } from "../../redux/userSlice";
 const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  useEffect(()=>{
+    if(!localStorage.getItem('usertoken')){
+      navigate('/signin')
+    }
+  },[])
   const handleLogout = () => {
     localStorage.removeItem('usertoken');
     dispatch(setUser(null))

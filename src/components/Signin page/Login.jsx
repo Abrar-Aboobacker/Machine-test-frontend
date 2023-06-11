@@ -272,7 +272,7 @@ const Login = () => {
                 sx={{
                   backgroundColor: "#171717",
                   mr: { md: 5, lg: 10 },
-                  height: "80%",
+                  height: "88%",
                   width: { md: 360, lg: 400 },
                   borderRadius: 6,
                   display: { xs: "none", sm: "none", md: "block" },

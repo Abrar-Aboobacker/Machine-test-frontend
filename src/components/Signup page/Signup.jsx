@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Circle from "../Background circle/Circle";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -22,6 +22,11 @@ const steps = ["Get OTP", "Validate OTP", "Sign in"];
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(()=>{
+    if(localStorage.getItem('usertoken')){
+      navigate('/')
+    }
+  },[])
   const formik = useFormik({
     initialValues: {
       name: "",
