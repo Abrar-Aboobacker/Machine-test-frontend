@@ -53,14 +53,15 @@ const LoginOtp = () => {
     validationSchema: otpSchema,
     onSubmit: async (values, helpers) => {
       try {
-        const response = await axios.post("/postOtp", {
+        const response = await axios.post("/loginpost", {
           values,
         });
         dispatch(hideLoading());
         if (response.data.success) {
           toast.success(response.data.message);
-          dispatch(setUser(null));
-          navigate("/success");
+          dispatch(setUser(response.data.user));
+          localStorage.setItem("usertoken", response.data.data)
+          navigate("/");
         } else {
           toast.error(response.data.message);
         }

@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Circle from "../Background circle/Circle";
 import axios from "../../axios/axios";
 import { hideLoading, showLoading } from "../../redux/alertsSlice";
@@ -21,8 +21,14 @@ import { loginSchema } from "../../validation/loginValidation";
 const steps = ["Get OTP", "Validate OTP", "Sign in"];
 
 const Login = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(()=>{
+    if(localStorage.getItem('usertoken')){
+      navigate('/')
+    }
+  },[])
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -31,7 +37,7 @@ const Login = () => {
     onSubmit: async (values, helpers) => {
       try {
         dispatch(showLoading());
-        const response = await axios.post("/signupPost", {
+        const response = await axios.post("/getLoginOtp", {
           values,
         });
         dispatch(hideLoading());
@@ -162,7 +168,7 @@ const Login = () => {
             backgroundColor: "rgba(23, 23, 23, 0.5)",
             flexDirection: "column",
             maxWidth: 1450,
-            width: { xs: "90%", sm: "85%", md: "95%", lg: "80%" },
+            width: { xs: "90%", sm: "85%", md: "95%", lg: "85%" },
             height: { xs: "40%", sm: "35%", md: "45%", lg: 400 },
             alignItems: "center",
             justifyContent: "center",
