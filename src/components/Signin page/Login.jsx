@@ -1,4 +1,12 @@
+import { Box, Button, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material'
 import React from 'react'
+import Circle from '../Background circle/Circle'
+const steps = [
+  'Get OTP',
+  'Validate OTP',
+  'Sign in',
+];
+
 
 const Login = () => {
   return (
