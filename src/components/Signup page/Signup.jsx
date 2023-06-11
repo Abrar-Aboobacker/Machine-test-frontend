@@ -7,7 +7,7 @@ const steps = [
   'Sign in',
 ];
 
-const SignupPage = () => {
+const Signup = () => {
   return (
     <>
       <Box
@@ -145,4 +145,4 @@ const SignupPage = () => {
   )
 }
 
-export default SignupPage
+export default Signup

@@ -1,11 +1,9 @@
-import { Box, Button, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material'
 import React from 'react'
-import Circle from '../Background circle/Circle'
 
-const SigninPage = () => {
+const Login = () => {
   return (
     <>
-    <Box
+     <Box
       sx={{
         height: {xs:915,sm:'140vh',md:'auto',lg:'auto'},
         width: {xs:'100%',sm:"110vw",md:'100%'},
@@ -126,9 +124,9 @@ const SigninPage = () => {
           </Box>
         </Box>
       </Box>
-    </Box>
-  </>
+    </Box> 
+    </>
   )
 }
 
-export default SigninPage
+export default Login
