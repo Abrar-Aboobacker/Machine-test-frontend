@@ -41,6 +41,7 @@ const Signup = () => {
       dispatch(hideLoading())
       if (response.data.success) {
         toast.success(response.data.message)
+        dispatch(setUser(values))
         navigate('/otp')
 
       }else{

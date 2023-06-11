@@ -7,11 +7,91 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Circle from "../Background circle/Circle";
+import { toast } from "react-hot-toast";
+import axios from "../../axios/axios.js"
+import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+import { otpSchema } from "../../validation/otpvalidation";
+import { hideLoading } from "../../redux/alertsSlice";
+import { setUser } from "../../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 const steps = ["Get OTP", "Validate OTP", "Sign in"];
 
 const Otp = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { user } = useSelector((state) => state.user);
+  const userEmail = user?.email
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(30);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(interval);
+        } else {
+          setSeconds(59);
+          setMinutes(minutes - 1);
+        }
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [seconds,minutes]);
+
+  const formik = useFormik({
+    initialValues: {
+        otpis:''
+    },
+    validationSchema:otpSchema,
+     onSubmit:async (values,helpers)=>{
+    try {
+      const response = await axios.post("/postOtp",{
+        values
+      })
+      dispatch(hideLoading())
+      if (response.data.success) {
+        toast.success(response.data.message)
+        dispatch(setUser(null))
+        navigate('/success')
+
+      }else{
+        toast.error(response.data.message)
+      }
+    } catch (error) {
+      helpers.setErrors({submit:error.message})
+      toast.error("something went wrongg")
+     }
+   }
+  })
+  const resendOTP = async () => {
+    setMinutes(0);
+    setSeconds(30);
+
+    try {
+      // dispatch(showLoading());
+      const response = await axios.post("/resendOtp", {
+        userEmail
+      });
+      // dispatch(hideLoading());
+      if (response.data.success) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("something went wrong");
+    }
+  };
   return (
     <>
       <Box
@@ -162,6 +242,7 @@ const Otp = () => {
                   </Step>
                 ))}
               </Stepper>
+              <form onSubmit={formik.handleSubmit}>
               <TextField
                 sx={{
                   backgroundColor: "#171717",
@@ -169,13 +250,20 @@ const Otp = () => {
                   mx: { xs: 2, sm: 10, md: 5, lg: 12 },
                   mt: { xs: 3, sm: 5 },
                 }}
+                name="otpis"
+                  value={formik.values.otpis}
+                  error={formik.errors.otpis}
+                  helperText={formik.errors.otpis}
+                  onChange={formik.handleChange}
                 margin="normal"
-                type={"password"}
+                type={"text"}
                 label="Enter OTP"
                 variant="outlined"
               />
               <Button
                 variant="contained"
+                name = "submit"
+                type="submit"
                 sx={{
                   backgroundColor: "#00ff66",
                   width: { xs: "90%", sm: 480, md: "75%", lg: "65%" },
@@ -192,6 +280,36 @@ const Otp = () => {
               >
                 Validate
               </Button>
+              </form>
+              <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    margin: "1.5rem 0",
+                  }}
+                >
+                  {seconds > 0 || minutes > 0 ? (
+                    <p style={{color:'white'}}>
+                      Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+                      {seconds < 10 ? `0${seconds}` : seconds}
+                    </p>
+                  ) : (
+                    <p style={{color:'white'}}>Didn't recieve code?</p>
+                  )}
+    
+                  <Button
+                    disabled={seconds > 0 || minutes > 0}
+                    sx={{
+                      color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#171717",
+                      backgroundColor: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#00ff66"
+                    }}
+                    onClick={resendOTP}
+                  
+                  >
+                    Resend OTP
+                  </Button>
+                </Box>
             </Box>
             <Box sx={{ mt: 4 }}>
               <Box
