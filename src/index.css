@@ -3,11 +3,19 @@ body {
   font-family: 'Poppins', sans-serif  ;
   background-color:'#171717' ;
 }
-
+a{
+  text-decoration: none;
+}
 code {
   font-family: 'Poppins', sans-serif ;
 }
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+  color: white !important;
+}
 .css-1hv8oq8-MuiStepLabel-label.MuiStepLabel-alternativeLabel{
+  color: white !important;
+}
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
   color: white !important;
 }
 .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
